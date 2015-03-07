@@ -2,17 +2,17 @@ package cassandra.data;
 
 import com.datastax.driver.core.Row;
 
-import java.util.Date;
 import java.util.UUID;
+import java.util.Date;
 
 /**
  * Created by colemw on 9/26/14.
  *
- * Data access object class (pre and post migration) for NonStudentByItem
+ * Data access object class (pre and post migration) for StudentByItem
  *
  */
 
-public class NonStudentByItemDAO implements DataObject {
+public class StudentByItem implements DataObject {
 
     // Exisiting data fields
     private String cid;
@@ -20,7 +20,6 @@ public class NonStudentByItemDAO implements DataObject {
     private String dsc;
     private String href;
     private Date lmd;
-    private boolean lock;
     private int lvl;
     private UUID rpid;
     private int so;
@@ -35,7 +34,7 @@ public class NonStudentByItemDAO implements DataObject {
     private Date duedate;
 
     // Incoming data constructor
-    public NonStudentByItemDAO(Row row) {
+    public StudentByItem(Row row) {
 
         cid = row.getString("cid");
         so = row.getInt("so");
@@ -43,7 +42,6 @@ public class NonStudentByItemDAO implements DataObject {
         dsc = row.getString("dsc");
         href = row.getString("href");
         lmd = row.getDate("lmd");
-        lock = row.getBool("lock");
         lvl = row.getInt("lvl");
         rpid = row.getUUID("rpid");
         tn = row.getString("tn");
@@ -52,8 +50,8 @@ public class NonStudentByItemDAO implements DataObject {
     }
 
     // Outbound data constructor
-    public NonStudentByItemDAO(String cid, String ctype, UUID id, String dsc, String cnttype, String cntid, String cnthref,
-                                Date lmd, int lvl, UUID rpid, int so, String tn, String ttl, Date duedate, boolean lock) {
+    public StudentByItem(String cid, String ctype, UUID id, String dsc, String cnttype, String cntid, String cnthref,
+                         Date lmd, int lvl, UUID rpid, int so, String tn, String ttl, Date duedate) {
 
         this.cid = cid;
         this.ctype = ctype;
@@ -69,7 +67,6 @@ public class NonStudentByItemDAO implements DataObject {
         this.tn = tn;
         this.ttl = ttl;
         this.duedate = duedate;
-        this.lock = lock;
 
     }
 
@@ -84,8 +81,6 @@ public class NonStudentByItemDAO implements DataObject {
     public String getHref() { return this.href; }
 
     public Date getLmd() { return this.lmd; }
-
-    public boolean getLock() { return this.lock; }
 
     public int getLvl() { return this.lvl; }
 
@@ -104,4 +99,5 @@ public class NonStudentByItemDAO implements DataObject {
     public String getCnthref() { return this.cnthref; }
 
     public Date getDuedate() { return this.duedate; }
+
 }

@@ -8,24 +8,24 @@ import java.util.UUID;
 /**
  * Created by colemw on 9/26/14.
  *
- * Data access object class (pre and post migration) for NonStudentItems
+ * Data access object class (pre and post migration) for NonStudentByItem
  *
  */
 
-public class NonStudentItemsDAO implements DataObject {
+public class NonStudentByItem implements DataObject {
 
     // Exisiting data fields
     private String cid;
-    private int so;
     private UUID id;
     private String dsc;
     private String href;
     private Date lmd;
+    private boolean lock;
     private int lvl;
     private UUID rpid;
+    private int so;
     private String tn;
     private String ttl;
-    private boolean lock;
 
     // New data fields
     private String ctype;
@@ -35,24 +35,25 @@ public class NonStudentItemsDAO implements DataObject {
     private Date duedate;
 
     // Incoming data constructor
-    public NonStudentItemsDAO(Row row) {
+    public NonStudentByItem(Row row) {
 
         cid = row.getString("cid");
         so = row.getInt("so");
         id = row.getUUID("id");
+        dsc = row.getString("dsc");
         href = row.getString("href");
         lmd = row.getDate("lmd");
+        lock = row.getBool("lock");
         lvl = row.getInt("lvl");
         rpid = row.getUUID("rpid");
         tn = row.getString("tn");
         ttl = row.getString("ttl");
-        lock = row.getBool("lock");
 
     }
 
     // Outbound data constructor
-    public NonStudentItemsDAO(String cid, String ctype, int so, UUID id, String dsc, String cnttype, String cntid, String cnthref,
-                                Date lmd, int lvl, UUID rpid, String tn, String ttl, Date duedate, boolean lock) {
+    public NonStudentByItem(String cid, String ctype, UUID id, String dsc, String cnttype, String cntid, String cnthref,
+                            Date lmd, int lvl, UUID rpid, int so, String tn, String ttl, Date duedate, boolean lock) {
 
         this.cid = cid;
         this.ctype = ctype;
@@ -80,11 +81,11 @@ public class NonStudentItemsDAO implements DataObject {
 
     public String getDsc() { return this.dsc; }
 
-	public void setDsc(String dsc) { this.dsc = dsc; }
-
     public String getHref() { return this.href; }
 
     public Date getLmd() { return this.lmd; }
+
+    public boolean getLock() { return this.lock; }
 
     public int getLvl() { return this.lvl; }
 
@@ -103,7 +104,4 @@ public class NonStudentItemsDAO implements DataObject {
     public String getCnthref() { return this.cnthref; }
 
     public Date getDuedate() { return this.duedate; }
-
-    public boolean getLock() { return this.lock; }
-
 }

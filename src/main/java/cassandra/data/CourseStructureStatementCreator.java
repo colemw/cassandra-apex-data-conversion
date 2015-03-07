@@ -86,7 +86,7 @@ public class CourseStructureStatementCreator implements StatementCreator {
 
         for (DataObject studentItem : inputList) {
 
-            StudentItemsDAO sti = (StudentItemsDAO) studentItem;
+            StudentItems sti = (StudentItems) studentItem;
 
             result.add(studentItemsInsert.bind(
                     sti.getCid()
@@ -116,7 +116,7 @@ public class CourseStructureStatementCreator implements StatementCreator {
 
         for (DataObject studentByItem : inputList) {
 
-            StudentByItemDAO stbi = (StudentByItemDAO) studentByItem;
+            StudentByItem stbi = (StudentByItem) studentByItem;
 
             result.add(studentByItemInsert.bind(
                     stbi.getCid()
@@ -146,7 +146,7 @@ public class CourseStructureStatementCreator implements StatementCreator {
 
         for (DataObject nonStudentItem : inputList) {
 
-            NonStudentItemsDAO nsti = (NonStudentItemsDAO) nonStudentItem;
+            NonStudentItems nsti = (NonStudentItems) nonStudentItem;
 
             result.add(nonStudentItemsInsert.bind(
                     nsti.getCid()
@@ -177,7 +177,7 @@ public class CourseStructureStatementCreator implements StatementCreator {
 
         for (DataObject nonStudentByItem : inputList) {
 
-            NonStudentByItemDAO nstbi = (NonStudentByItemDAO) nonStudentByItem;
+            NonStudentByItem nstbi = (NonStudentByItem) nonStudentByItem;
 
             result.add(nonStudentByItemInsert.bind(
                     nstbi.getCid()

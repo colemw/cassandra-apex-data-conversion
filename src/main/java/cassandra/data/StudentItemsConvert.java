@@ -4,8 +4,6 @@ package cassandra.data;
 import com.datastax.driver.core.*;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.BatchStatement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -49,15 +47,15 @@ public class StudentItemsConvert implements Convert {
 	    // Get its related data from the byitems table
 	    Statement itemsSelect = statementCreator.createStudentByItemSelect(key);
 	    List<Row> itemResultRaw = sourceSession.execute(itemsSelect).all();
-        Map<UUID, StudentByItemDAO> byItems = new HashMap<>();
+        Map<UUID, StudentByItem> byItems = new HashMap<>();
 
         for (Row item : itemResultRaw) {
-            StudentByItemDAO newItem = new StudentByItemDAO(item);
+            StudentByItem newItem = new StudentByItem(item);
             byItems.put(newItem.getId(), newItem);
         }
 
         for (Row row : results) {
-            StudentItemsDAO newStudentItem = new StudentItemsDAO(row);
+            StudentItems newStudentItem = new StudentItems(row);
 
             if (byItems.containsKey(newStudentItem.getId()))
                 newStudentItem.setDsc(byItems.get(newStudentItem.getId()).getDsc());
@@ -75,7 +73,7 @@ public class StudentItemsConvert implements Convert {
 
         for (DataObject sti : inputList) {
 
-            StudentItemsDAO newSti = convertRow(sti);
+            StudentItems newSti = convertRow(sti);
             outputList.add(newSti);
 
         }
@@ -95,15 +93,15 @@ public class StudentItemsConvert implements Convert {
     // href from existing object gets assignesd to cnthref
     // ctype is assigned the static value from CONTEXT_TYPE_DEFAULT within DataObject
 
-    public StudentItemsDAO convertRow(DataObject sti) {
+    public StudentItems convertRow(DataObject sti) {
 
         String cnttype = null;
         String cntid = null;
         Date duedate = null;
 
-        StudentItemsDAO tempSti = ((StudentItemsDAO) sti);
+        StudentItems tempSti = ((StudentItems) sti);
 
-        return new StudentItemsDAO(
+        return new StudentItems(
                 tempSti.getCid()
                 ,tempSti.getCtype()
                 ,tempSti.getSo()

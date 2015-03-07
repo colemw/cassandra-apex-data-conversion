@@ -2,44 +2,43 @@ package cassandra.data;
 
 import com.datastax.driver.core.Row;
 
-import java.util.UUID;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by colemw on 9/26/14.
  *
- * Data access object class (pre and post migration) for StudentByItem
+ * Data access object class (pre and post migration) for StudentItems
  *
  */
 
-public class StudentByItemDAO implements DataObject {
+public class StudentItems implements DataObject {
 
-    // Exisiting data fields
+    //Exisiting data fields
     private String cid;
+    private int so;
     private UUID id;
     private String dsc;
     private String href;
     private Date lmd;
     private int lvl;
     private UUID rpid;
-    private int so;
     private String tn;
     private String ttl;
 
-    // New data fields
+    //New data fields
     private String ctype;
     private String cnttype;
     private String cntid;
     private String cnthref;
     private Date duedate;
 
-    // Incoming data constructor
-    public StudentByItemDAO(Row row) {
+    //Incoming data constructor
+    public StudentItems(Row row) {
 
         cid = row.getString("cid");
         so = row.getInt("so");
         id = row.getUUID("id");
-        dsc = row.getString("dsc");
         href = row.getString("href");
         lmd = row.getDate("lmd");
         lvl = row.getInt("lvl");
@@ -49,9 +48,9 @@ public class StudentByItemDAO implements DataObject {
 
     }
 
-    // Outbound data constructor
-    public StudentByItemDAO(String cid, String ctype, UUID id, String dsc, String cnttype, String cntid, String cnthref,
-                           Date lmd, int lvl, UUID rpid, int so, String tn, String ttl, Date duedate) {
+    //Outbound data constructor
+    public StudentItems(String cid, String ctype, int so, UUID id, String dsc, String cnttype, String cntid, String cnthref,
+                        Date lmd, int lvl, UUID rpid, String tn, String ttl, Date duedate) {
 
         this.cid = cid;
         this.ctype = ctype;
@@ -78,7 +77,9 @@ public class StudentByItemDAO implements DataObject {
 
     public String getDsc() { return this.dsc; }
 
-    public String getHref() { return this.href; }
+	public void setDsc(String desc) { dsc = desc; }
+
+    public String getHref() {return this.href; }
 
     public Date getLmd() { return this.lmd; }
 
@@ -99,5 +100,4 @@ public class StudentByItemDAO implements DataObject {
     public String getCnthref() { return this.cnthref; }
 
     public Date getDuedate() { return this.duedate; }
-
 }

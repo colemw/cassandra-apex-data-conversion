@@ -43,7 +43,7 @@ public class NonStudentByItemConvert implements Convert {
 
         for (Row row : results) {
 
-            nonStudentByItem.add(new NonStudentByItemDAO(row));
+            nonStudentByItem.add(new NonStudentByItem(row));
         }
 
         return nonStudentByItem;
@@ -56,7 +56,7 @@ public class NonStudentByItemConvert implements Convert {
 
         for (DataObject nstbi : inputList) {
 
-            NonStudentByItemDAO newNstbi = convertRow(nstbi);
+            NonStudentByItem newNstbi = convertRow(nstbi);
             outputList.add(newNstbi);
 
         }
@@ -76,15 +76,15 @@ public class NonStudentByItemConvert implements Convert {
     // href from existing object gets assignesd to cnthref
     // ctype is assigned the static value from CONTEXT_TYPE_DEFAULT within DataObject
 
-    public NonStudentByItemDAO convertRow(DataObject nstbi) {
+    public NonStudentByItem convertRow(DataObject nstbi) {
 
         String cnttype = null;
         String cntid = null;
         Date duedate = null;
 
-        NonStudentByItemDAO tempNstbi = ((NonStudentByItemDAO) nstbi);
+        NonStudentByItem tempNstbi = ((NonStudentByItem) nstbi);
 
-        return new NonStudentByItemDAO(
+        return new NonStudentByItem(
                 tempNstbi.getCid()
                 ,tempNstbi.getCtype()
                 ,tempNstbi.getId()
